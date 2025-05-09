@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CINEVO - Endless Entertainment</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
+  <style>
+    :root {
+      --primary-color: #0d6efd;
+      --dark-color: #0f172a;
+      --accent-color: #ff4d4d;
+      --light-color: #f8f9fa;
+    }
+    
+    body {
+      background-color: #f5f5f5;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    
+    .navbar {
+      background: linear-gradient(135deg, var(--dark-color), #1e293b);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      padding: 15px 0;
+    }
+    
+    .navbar-brand {
+      font-size: 2rem;
+      font-weight: 700;
+      color: white;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+    
+    .navbar-brand span {
+      color: var(--accent-color);
+    }
+    
+    .tagline {
+      color: #e2e8f0 !important;
+      font-size: 1rem !important;
+      font-weight: 300;
+    }
+    
+    /* Main Search Bar */
+    .search-container {
+      background-color: var(--dark-color);
+      padding: 30px 0;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      transition: all 0.3s ease;
+    }
+    
+    .search-container.small {
+      padding: 15px 0;
+      background-color: rgba(15, 23, 42, 0.95);
+      backdrop-filter: blur(5px);
+    }
+    
+    .search-form {
+      max-width: 800px;
+      margin: 0 auto;
+      position: relative;
+    }
+    
+    .search-input {
+      border-radius: 50px;
+      padding: 15px 25px;
+      border: none;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      font-size: 1.1rem;
+      width: 100%;
+      padding-right: 60px;
+    }
+    
+    .search-button {
+      position: absolute;
+      right: 5px;
+      top: 5px;
+      border-radius: 50px;
+      padding: 10px 25px;
+      background-color: var(--accent-color);
+      border: none;
+      color: white;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+    
+    .search-button:hover {
+      background-color: #ff3333;
+      transform: scale(1.05);
+    }
+    
+    .search-results-count {
+      color: white;
+      text-align: center;
+      margin-top: 10px;
+      font-size: 0.9rem;
+      opacity: 0.8;
+    }
+    
+    .mid-1 .btn {
+      border-radius: 50px;
+      padding: 8px 20px;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+    
+    .mid-1 .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    
+    .mid-1 .btn-outline-primary {
+      color: var(--dark-color);
+      border-color: var(--dark-color);
+    }
+    
+    .mid-1 .btn-outline-primary:hover {
+      background-color: var(--dark-color);
+      color: white;
+    }
+    
+    .carousel-item {
+      height: 70vh;
+      min-height: 400px;
+      background-size: cover;
+      background-position: center;
+      position: relative;
+    }
+    
+    .carousel-item::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to right, rgba(0, 0, 0, 0.8) 30%, transparent);
+    }
+    
+    .carousel-caption {
+      left: 5%;
+      right: auto;
+      bottom: 20%;
+      text-align: left;
+      width: 40%;
+    }
+    
+    .tran {
+      background-color: rgba(255, 77, 77, 0.2);
+      color: white;
+      border: none;
+    }
+    
+    .carousel-caption .btn {
+      border-radius: 50px;
+      padding: 10px 25px;
+      font-weight: 600;
+      margin-top: 20px;
+    }
+    
+    .carousel-caption .btn-outline-info {
+      color: white;
+      border-color: white;
+    }
+    
+    .carousel-caption .btn-outline-info:hover {
+      background-color: white;
+      color: var(--dark-color);
+    }
+    
+    .heading {
+      font-size: 1.8rem;
+      margin-left: 5%;
+      margin-bottom: 20px;
+      position: relative;
+      display: inline-block;
+    }
+    
+    .heading::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 50%;
+      height: 3px;
+      background-color: var(--accent-color);
+    }
+    
+    .img-11 {
+      overflow-x: auto;
+      white-space: nowrap;
+      padding: 20px;
+      scrollbar-width: none;
+    }
+    
+    .img-11::-webkit-scrollbar {
+      display: none;
+    }
+    
+    .imgg-1 {
+      transition: all 0.3s ease;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      margin-right: 15px;
+      height: 250px;
+      cursor: pointer;
+    }
+    
+    .imgg-1:hover {
+      transform: scale(1.05) translateY(-5px);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    }
+    
+    .movie-card {
+      transition: all 0.3s ease;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      background-color: white;
+    }
+    
+    .movie-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+    
+    .movie-card img {
+      height: 300px;
+      object-fit: cover;
+      width: 100%;
+    }
+    
+    .card-title {
+      font-weight: 600;
+      color: var(--dark-color);
+    }
+    
+    footer {
+      background-color: var(--dark-color);
+      color: white;
+      padding: 40px 0;
+      margin-top: 50px;
+    }
+    
+    .footer-links a {
+      color: #94a3b8;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    
+    .footer-links a:hover {
+      color: white;
+    }
+    
+    .social-icons a {
+      color: white;
+      font-size: 1.5rem;
+      margin-right: 15px;
+      transition: transform 0.3s ease;
+    }
+    
+    .social-icons a:hover {
+      transform: translateY(-3px);
+      color: var(--accent-color);
+    }
+    
+    /* Floating search button for mobile */
+    .floating-search-btn {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background-color: var(--accent-color);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 15px rgba(255, 77, 77, 0.4);
+      z-index: 1000;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: none;
+    }
+    
+    .floating-search-btn:hover {
+      transform: scale(1.1);
+    }
+    
+    @media (max-width: 992px) {
+      .carousel-item {
+        height: 60vh;
+      }
+      
+      .carousel-caption {
+        width: 60%;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .navbar-brand {
+        font-size: 1.8rem;
+      }
+      
+      .carousel-item {
+        height: 50vh;
+      }
+      
+      .carousel-caption {
+        width: 80%;
+        bottom: 15%;
+      }
+      
+      .carousel-caption h2 {
+        font-size: 1.5rem;
+      }
+      
+      .carousel-caption p {
+        display: none;
+      }
+      
+      .mid-1 {
+        overflow-x: auto;
+        white-space: nowrap;
+        flex-wrap: nowrap;
+        justify-content: flex-start;
+        padding-bottom: 10px;
+      }
+      
+      .search-container {
+        display: none;
+      }
+      
+      .floating-search-btn {
+        display: flex;
+      }
+      
+      .mobile-search-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        background-color: var(--dark-color);
+        padding: 15px;
+        z-index: 1100;
+        display: none;
+      }
+    }
+    
+    @media (max-width: 576px) {
+      .carousel-item {
+        height: 40vh;
+      }
+      
+      .carousel-caption {
+        width: 90%;
+        bottom: 10%;
+      }
+      
+      .imgg-1 {
+        height: 180px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg">
+    <div class="container-xl">
+      <a class="navbar-brand" href="#">CINE<span>VO</span></a>
+      <div class="tagline fs-4">Endless Entertainment, Anytime, Anywhere!</div>
+      <div class="d-none d-lg-flex align-items-center ms-3">
+       
+        <button class="btn btn-accent" style="background-color: var(--accent-color); color: white;">
+          Sign In
+        </button>
+      </div>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="d-flex ms-auto d-lg-none">
+          <button class="btn btn-outline-light me-2" onclick="showSearch()">
+            <i class="fas fa-search"></i>
+          </button>
+          <button class="btn btn-accent" style="background-color: var(--accent-color); color: white;">
+            Sign In
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Search Bar -->
+  <div class="search-container" id="mainSearch">
+    <div class="container-xl">
+      <form class="search-form" role="search" onsubmit="handleSearchSubmit(); return false;">
+        <input id="movieInput" class="search-input" type="search"
+               placeholder="Search for movies, TV shows, actors..." aria-label="Search"/>
+        <button class="search-button" type="submit">
+          <i class="fa-solid fa-magnifying-glass me-2"></i> Search
+        </button>
+      </form>
+      <div class="search-results-count" id="resultsCount"></div>
+    </div>
+  </div>
+
+  <!-- Mobile Search (hidden by default) -->
+  <div class="mobile-search-container" id="mobileSearch">
+    <div class="d-flex align-items-center">
+      <button class="btn btn-link text-white me-2" onclick="hideSearch()">
+        <i class="fas fa-arrow-left"></i>
+      </button>
+      <form class="flex-grow-1" role="search" onsubmit="handleSearchSubmit(); return false;">
+
+      </form>
+    </div>
+  </div>
+
+  <!-- Floating Search Button (Mobile Only) -->
+  <div class="floating-search-btn" onclick="showSearch()">
+    <i class="fas fa-search fa-lg"></i>
+  </div>
+
+  <!-- Categories -->
+  <div class="container-xl mt-4">
+    <div class="d-flex justify-content-start align-items-center flex-wrap gap-3 mid-1 my-3 py-2">
+      <button type="button" class="btn btn-outline-primary active" onclick="searchCategory('movie')">All</button>
+      <button type="button" class="btn btn-outline-primary" onclick="searchCategory('action')">Action</button>
+      <button type="button" class="btn btn-outline-primary" onclick="searchCategory('comedy')">Comedy</button>
+      <button type="button" class="btn btn-outline-primary" onclick="searchCategory('horror')">Horror</button>
+      <button type="button" class="btn btn-outline-primary" onclick="searchCategory('romance')">Romance</button>
+      <button type="button" class="btn btn-outline-primary" onclick="searchCategory('sci-fi')">Sci-Fi</button>
+      <button type="button" class="btn btn-outline-primary" onclick="searchCategory('thriller')">Thriller</button>
+      <button type="button" class="btn btn-outline-primary" onclick="searchCategory('drama')">Drama</button>
+    </div>
+  </div>
+
+  <div class="container-xl mt-4">
+    <h3 class="heading" id="resultsHeading"> </h3>
+    <div id="movie" class="row "></div>
+  </div>
+</div>
+
+  <!-- Hero Carousel -->
+  <div class="main-3">
+    <div class="slider-1">
+      <div id="carouselExampleDark" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+          <div class="carousel-item active" data-bs-interval="5000" 
+               style="background-image: url('https://image.tmdb.org/t/p/original/8ZTVqvKDQ8emSGUEMjsS4yHAwrp.jpg')">
+            <div class="carousel-caption">
+              <div class="tt-1 mb-3">
+                <button type="button" class="btn tran">
+                  <i class="fa-solid fa-fire"></i> Trending Now
+                </button>
+              </div>
+              <h2 class="fw-bold mb-3">Oblivion</h2>
+              <p class="mb-4">A veteran assigned to extract Earth's remaining resources begins to question what he knows about his mission and himself.</p>
+              <div class="d-flex gap-3">
+                <div><a href="video.html" class="btn btn-primary"><i class="fas fa-play me-2"></i>WATCH NOW</a></div>
+                <div><button type="button" class="btn btn-outline-info"><i class="fa-solid fa-plus me-2"></i>MY LIST</button></div>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-item" data-bs-interval="5000"
+               style="background-image: url('https://image.tmdb.org/t/p/original/8Gxv8gSFCU0XGDykEGv7zR1n2ua.jpg')">
+            <div class="carousel-caption">
+              <div class="tt-1 mb-3">
+                <button type="button" class="btn tran">
+                  <i class="fa-solid fa-bolt"></i> New Release
+                </button>
+              </div>
+              <h2 class="fw-bold mb-3">Dune: Part Two</h2>
+              <p class="mb-4">Follow the mythic journey of Paul Atreides as he unites with Chani and the Fremen while on a path of revenge against the conspirators who destroyed his family.</p>
+              <div class="d-flex gap-3">
+                <div><a href="video.html" class="btn btn-primary"><i class="fas fa-play me-2"></i>WATCH NOW</a></div>
+                <div><button type="button" class="btn btn-outline-info"><i class="fa-solid fa-plus me-2"></i>MY LIST</button></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+    </div>
+    
+    <!-- Search Results -->
+   
+
+  <!-- Trending Now -->
+  <div class="container-xl mt-5">
+    <h3 class="heading">Trending Now</h3>
+    <div class="img-11">
+      <img src="https://image.tmdb.org/t/p/w500/y0j9HbsWnkn1TlT6Y52ZrsvysgU.jpg" class="imgg-1" alt="The Batman" onclick="searchMovie('The Batman')"/>
+      <img src="https://image.tmdb.org/t/p/w500/wq3vuQzQgbS83zX3malAFWMsSwX.jpg" class="imgg-1" alt="Interstellar" onclick="searchMovie('Interstellar')"/>
+      <img src="https://image.tmdb.org/t/p/w500/eZCZPIE1WdmIoSK5RO6pM8KYAwe.jpg" class="imgg-1" alt="Inception" onclick="searchMovie('Inception')"/>
+      <img src="https://image.tmdb.org/t/p/w500/vUUqzWa2LnHIVqkaKVlVGkVcZIW.jpg" class="imgg-1" alt="The Dark Knight" onclick="searchMovie('The Dark Knight')"/>
+      <img src="https://image.tmdb.org/t/p/w500/cPPhduQk1eX0MAE2JDaQRh3UZB5.jpg" class="imgg-1" alt="Joker" onclick="searchMovie('Joker')"/>
+      <img src="https://image.tmdb.org/t/p/w500/uux6M8z3hxLDkq8LXSzq8528mrq.jpg" class="imgg-1" alt="Avengers: Endgame" onclick="searchMovie('Avengers Endgame')"/>
+      <img src="https://image.tmdb.org/t/p/w500/6HAbRWYkX3bouEeHA4bjsUxznKC.jpg" class="imgg-1" alt="Dune" onclick="searchMovie('Dune')"/>
+      <img src="https://image.tmdb.org/t/p/w500/8Gxv8gSFCU0XGDykEGv7zR1n2ua.jpg" class="imgg-1" alt="Dune: Part Two" onclick="searchMovie('Dune Part Two')"/>
+    </div>
+  </div>
+  
+  <!-- Popular Movies -->
+  <div class="container-xl mt-5">
+    <h3 class="heading">Popular Movies</h3>
+    <div class="img-11">
+      <img src="https://image.tmdb.org/t/p/w500/1pdfLvkbY9ohJlCjQH2CZjjYVvJ.jpg" class="imgg-1" alt="The Shawshank Redemption" onclick="searchMovie('The Shawshank Redemption')"/>
+      <img src="https://image.tmdb.org/t/p/w500/q6y0Go1tsGEsmtFryDOJo3dEmqu.jpg" class="imgg-1" alt="The Godfather" onclick="searchMovie('The Godfather')"/>
+      <img src="https://image.tmdb.org/t/p/w500/3bhkrj58Vtu7enYsRolD1fZdja1.jpg" class="imgg-1" alt="The Godfather Part II" onclick="searchMovie('The Godfather Part II')"/>
+      <img src="https://image.tmdb.org/t/p/w500/lyQBXzOQSuE59IsHyhrp0qIiPAz.jpg" class="imgg-1" alt="Pulp Fiction" onclick="searchMovie('Pulp Fiction')"/>
+      <img src="https://image.tmdb.org/t/p/w500/arw2vcBveWOVZr6pxd9XTd1TdQa.jpg" class="imgg-1" alt="Fight Club" onclick="searchMovie('Fight Club')"/>
+      <img src="https://image.tmdb.org/t/p/w500/7IiTTgloJzvGI1TAYymCfbfl3vT.jpg" class="imgg-1" alt="Parasite" onclick="searchMovie('Parasite')"/>
+      <img src="https://image.tmdb.org/t/p/w500/tVxDe01Zy3kZqaZRNiXFGDICdZk.jpg" class="imgg-1" alt="The Matrix" onclick="searchMovie('The Matrix')"/>
+    </div>
+  </div>
+  
+  <!-- Footer -->
+  <footer>
+    <div class="container-xl">
+      <div class="row">
+        <div class="col-md-4 mb-4">
+          <h3 class="mb-3">CINE<span style="color: var(--accent-color)">VO</span></h3>
+          <p>Endless Entertainment, Anytime, Anywhere!</p>
+          <div class="social-icons mt-3">
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-youtube"></i></a>
+          </div>
+        </div>
+        <div class="col-md-2 col-6 mb-4">
+          <h5 class="mb-3">Navigation</h5>
+          <div class="footer-links d-flex flex-column">
+            <a href="#" class="mb-2">Home</a>
+            <a href="#" class="mb-2">Movies</a>
+            <a href="#" class="mb-2">TV Shows</a>
+            <a href="#" class="mb-2">My List</a>
+          </div>
+        </div>
+        <div class="col-md-2 col-6 mb-4">
+          <h5 class="mb-3">Legal</h5>
+          <div class="footer-links d-flex flex-column">
+            <a href="#" class="mb-2">Terms of Use</a>
+            <a href="#" class="mb-2">Privacy Policy</a>
+            <a href="#" class="mb-2">Cookie Policy</a>
+            <a href="#" class="mb-2">GDPR</a>
+          </div>
+        </div>
+        <div class="col-md-4 mb-4">
+          <h5 class="mb-3">Subscribe to Newsletter</h5>
+          <p>Get the latest movie updates and recommendations</p>
+          <div class="input-group mb-3">
+            <input type="email" class="form-control" placeholder="Your email">
+            <button class="btn btn-primary" type="button">Subscribe</button>
+          </div>
+        </div>
+      </div>
+      <hr class="my-4 bg-secondary">
+      <div class="text-center">
+        <p class="mb-0">© 2023 CINEVO. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+  <script>
+     const apikey = '3875d0d6';
+
+function searchMovie(query) {
+  const url = `https://www.omdbapi.com/?apikey=${apikey}&s=${encodeURIComponent(query)}`;
+  fetch(url)
+    .then(response => response.json())
+    .then(data => {
+      const container = document.getElementById('movie');
+      container.innerHTML = '';
+
+      if (data.Response === "False") {
+        container.innerHTML = '<p class="text-danger">No results found.</p>';
+        return;
+      }
+
+      data.Search.forEach(item => {
+        const movieCard = `
+          <div class="card mb-3" style="max-width: 540px;">
+            <div class="row g-0">
+              <div class="col-md-4">
+                <img src="${item.Poster !== 'N/A' ? item.Poster : 'https://via.placeholder.com/200x300?text=No+Image'}" class="img-fluid rounded-start" alt="${item.Title}">
+              </div>
+              <div class="col-md-8">
+                <div class="card-body">
+                  <h5 class="card-title">${item.Title}</h5>
+                  <p class="card-text"><small class="text-muted">${item.Year} - ${item.Type}</small></p>
+                </div>
+              </div>
+            </div>
+          </div>`;
+        container.innerHTML += movieCard;
+      });
+    })
+    .catch(error => {
+      console.error('Fetch error:', error);
+      document.getElementById('movie').innerHTML = '<p class="text-danger">Something went wrong.</p>';
+    });
+}
+
+function handleSearchSubmit() {
+  const query = document.getElementById('movieInput').value.trim();
+  if (query) {
+    searchMovie(query);
+  }
+}
+
+// Add click event to each category button
+document.querySelectorAll('.btn-outline-primary').forEach(button => {
+  button.addEventListener('click', () => {
+    const category = button.textContent.trim();
+    searchMovie(category);
+  });
+});
+  </script>
+
+</body>
+
+</html>
